@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="inner">
+        <div class="mb-3">
+            <h1 for="formGroupExampleInput" class="form-label">Rail Fence</h1>
+            <input type="text" id="encrypt" name="encrypt" class="form-control" id="formGroupExampleInput" placeholder="Text to encrypt.."/>
+        </div>  
+        <p><input id="key" name="key" class="form-control input-sm" id="formGroupExampleInput" type="text" placeholder="Rails"></p>
+        <p><input name="btnEn" value="Encrypt v" onclick="EncrytionRail()" type="button" class="btn btn-primary"> 
+        <input name="btnDe" value="Decrypt ^" onclick="DecryptionRail()" type="button" class="btn btn-primary"></p>
+        <div class="mb-3">
+            <h4 for="formGroupExampleInput" class="form-label">Text encrypted</h5>
+            <input type="text" id="encrypted" name="encrypted" class="form-control" id="formGroupExampleInput"/>
+        </div>   
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner">
+        <div class="mb-3">
+            <h1 for="formGroupExampleInput" class="form-label">Caesar Cipher</h1>
+            <input type="text" id="cencrypt" name="cencrypt" class="form-control" id="formGroupExampleInput" placeholder="Text to encrypt.."/>
+        </div>  
+        <p><input id="key2" name="key2" class="form-control input-sm" id="formGroupExampleInput" type="text" placeholder="Key"></p>
+        <p><input name="btnEn2" value="Encrypt v" onclick="CaesarEncrypt()" type="button" class="btn btn-primary"> 
+        <input name="btnDe2" value="Decrypt ^" onclick="CaesarDecrypt()" type="button" class="btn btn-primary"></p>
+        <div class="mb-3">
+            <h4 for="formGroupExampleInput" class="form-label">Text encrypted</h5>
+            <input type="text" id="cencrypted" name="cencrypted" class="form-control" id="formGroupExampleInput"/>
+        </div>   
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner">
+        <div class="mb-3">
+            <h1 for="formGroupExampleInput" class="form-label">Vigenere Cipher</h1>
+            <input type="text" id="vencrypt" name="vencrypt" class="form-control" id="formGroupExampleInput" placeholder="Text to encrypt.."/>
+        </div>  
+        <p><input id="key3" name="key3" class="form-control input-sm" id="formGroupExampleInput" type="text" placeholder="Key Phrase"></p>
+        <p><input name="btnKey" value="Gen Key" onclick="genKey()" type="button" class="btn btn-primary">
+            <input name="btnEn3" value="Encrypt v" onclick="vcipherText()" type="button" class="btn btn-primary"> 
+        <input name="btnDe3" value="Decrypt ^" onclick="vDecrypt()" type="button" class="btn btn-primary"></p>
+        <div class="mb-3">
+            <h4 for="formGroupExampleInput" class="form-label">Text encrypted</h5>
+            <input type="text" id="vencrypted" name="vencrypted" class="form-control" id="formGroupExampleInput"/>
+        </div>   
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner">
+        <div class="mb-3">
+            <h1 for="formGroupExampleInput" class="form-label">Matrix A</h1>
+            <input type="text" id="aencrypt" name="aencrypt" class="form-control" id="formGroupExampleInput" placeholder="Text to encrypt.."/>
+        </div>  
+        <p><input id="key4" name="key4" class="form-control input-sm" id="formGroupExampleInput" type="text" placeholder="3-1-4-2"></p>
+        <p><input name="btnEn4" value="Encrypt v" onclick="macierz_2a_szyfr()" type="button" class="btn btn-primary"> 
+        <input name="btnDe4" value="Decrypt ^" onclick="macierz_2a_deszyfr()" type="button" class="btn btn-primary"></p>
+        <div class="mb-3">
+            <h4 for="formGroupExampleInput" class="form-label">Text encrypted</h5>
+            <input type="text" id="aencrypted" name="aencrypted" class="form-control" id="formGroupExampleInput"/>
+        </div>   
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner">
+        <div class="mb-3">
+            <h1 for="formGroupExampleInput" class="form-label">Matrix B</h1>
+            <input type="text" id="bencrypt" name="bencrypt" class="form-control" id="formGroupExampleInput" placeholder="Text to encrypt.."/>
+        </div>  
+        <p><input id="key5" name="key5" class="form-control input-sm" id="formGroupExampleInput" type="text" placeholder="Key Phrase"></p>
+        <p><input name="btnEn5" value="Encrypt v" onclick="macierz_2a_szyfr()" type="button" class="btn btn-primary"> 
+        <input name="btnDe5" value="Decrypt ^" onclick="macierz_2a_deszyfr()" type="button" class="btn btn-primary"></p>
+        <div class="mb-3">
+            <h4 for="formGroupExampleInput" class="form-label">Text encrypted</h5>
+            <input type="text" id="bencrypted" name="bencrypted" class="form-control" id="formGroupExampleInput"/>
+        </div>   
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner">
+        <div class="mb-3">
+            <h1 for="formGroupExampleInput" class="form-label">Matrix C</h1>
+            <input type="text" id="ccencrypt" name="ccencrypt" class="form-control" id="formGroupExampleInput" placeholder="Text to encrypt.."/>
+        </div>  
+        <p><input id="key6" name="key6" class="form-control input-sm" id="formGroupExampleInput" type="text" placeholder="Key Phrase"></p>
+        <p><input name="btnEn6" value="Encrypt v" onclick="macierz_2a_szyfr()" type="button" class="btn btn-primary"> 
+        <input name="btnDe6" value="Decrypt ^" onclick="macierz_2a_deszyfr()" type="button" class="btn btn-primary"></p>
+        <div class="mb-3">
+            <h4 for="formGroupExampleInput" class="form-label">Text encrypted</h5>
+            <input type="text" id="ccencrypted" name="ccencrypted" class="form-control" id="formGroupExampleInput"/>
+        </div>   
+        </div>
+    </div>
+</body>
+</html>

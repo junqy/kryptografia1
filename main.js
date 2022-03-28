@@ -177,7 +177,7 @@ function vDecrypt(){
 }
 
 function MatrixB(){
-    let key = document.getElementById("key4").value;
+    let key = document.getElementById("key5").value;
     let sortedKey = key.split('').sort()
     let idx
     let tab = new Array(key.length)
@@ -187,4 +187,218 @@ function MatrixB(){
         tab[idx] = i + 1
     }
     list = tab
+    return list
 }
+function MatrixC(){
+    let key = document.getElementById("key6").value;
+    let sortedKey = key.split('').sort()
+    let idx
+    let tab = new Array(key.length)
+    for(i=0; i< +key.length; i++){
+        idx = key.indexOf(sortedKey[i]) 
+        key = key.substring(0,idx) + " " + key.substring(idx+1);
+        tab[idx] = i + 1
+    }
+    list = tab
+    return list
+}
+
+function macierz_2a_deszyfr() {
+    var klucz = document.getElementById("key4").value
+    klucz = klucz.split('-').map(Number)
+    var coded = document.getElementById("aencrypted").value
+    var rkey = [];
+    var decodedword = [];
+    for (i = 0; i < klucz.length; i++) {
+      rkey[i] = klucz[klucz.length - 1 - i];
+      
+    }
+   
+    for (let j = 0; j < coded.length; j += rkey.length) {
+      rkey.forEach((e) => {
+       if(decodedword.length < coded.length)
+        if(e - 1 + j >= coded.length){
+          decodedword += coded.charAt(coded.length -1)
+          
+        }
+        else{
+          decodedword += coded[e - 1 + j];
+        }
+      
+      });
+    }
+    document.getElementById("aencrypt").value = decodedword;
+  
+  }
+  
+  
+  function macierz_2a_szyfr() {
+    
+    var result = [];
+    var słowo = document.getElementById("aencrypt").value
+    var klucz = document.getElementById("key4").value
+    klucz = klucz.split('-').map(Number)
+    console.log("klucz " + klucz)
+    for (let i = 0; i < słowo.length; i += klucz.length) {
+      klucz.forEach((e) => {
+        if (e - 1 + i < słowo.length) {
+          result += słowo[e - 1 + i];
+        }
+      });
+    }
+    
+    document.getElementById("aencrypted").value = result
+  }
+  
+  
+  
+  function BEncrypt(){
+      var key = document.getElementById("key5").value
+      var text = document.getElementById("bencrypt").value
+      MatrixB(key)
+      
+      let result = ""
+     
+   
+      let x = Math.ceil(text.length/list.length)
+      text = text.replace(/ +/g, "");
+      
+      let rows = Array.from(Array(x), () => new Array(list.length))
+    
+      
+      let pozycja = 0
+      for(let i = 0; i < x; i++  ){
+        for(let j = 0; j < list.length;j++){
+          if(pozycja < text.length){
+          rows[i][j] = text[pozycja++]
+          }
+          
+        }
+        
+      }
+      
+      
+  
+   let p = 0
+     
+      for(let i = 0; i <= list.length; i++ ){
+        for(let j = 0; j < x;j++){
+          
+          
+          if( !rows[j][list.indexOf(i)]){
+            continue
+            
+          }else{
+            result += rows[j][list.indexOf(i)]
+          }
+  
+        }
+        result += ' '
+      }
+      result = result.slice(1)
+     document.getElementById("bencrypted").value = result
+  }
+  
+  function BDecrypt(){
+    let k = document.getElementById("key5").value
+    let text = document.getElementById("bencrypted").value
+    let key = MatrixB()
+    let tab = []
+    tab = text.split(' ')
+    
+    let x = Math.ceil(text.length/list.length)
+    let result = ""
+    for(let i = 0; i< x ; i++){
+      for(let j = 0; j<key.length;j++){
+        if(!tab[key[j] -1][i]){
+          continue
+        }else{
+          result += tab[key[j] -1][i]
+        }
+      }
+    }
+    document.getElementById("bencrypt").value = result
+  }
+  
+  function CEncrypt(){
+      console.log("C macierz")
+    let text = document.getElementById("ccencrypt").value
+    let key = document.getElementById("key6").value
+    let list = MatrixC()
+    text = text.replace(/ +/g, "");
+    let tab = []
+    let count = 0
+    let pozycja = list.length
+    let result = ''
+    
+    for(let i = 0; i < pozycja;i++){
+      if(count == text.length){
+        break
+      }else{
+  
+      tab[i] = ''
+      for(let j = 0; j <= list.indexOf(i+1);j++){
+        if(!text[count]){
+          continue
+        }else{
+          tab[i] += text[count++]
+        }
+        
+      }
+    }
+    }
+  
+    
+    let temp =''
+    for(let i = 0;i < list.length;i++){
+      for(let j = 0; j < tab.length;j++){
+      
+        
+       
+          if(!tab[j][list.indexOf(i+1)]){
+            continue
+          }else{
+            result += tab[j][list.indexOf(i+1)]
+          }
+        
+        
+      }
+      result += ' '
+    }
+    console.log(result)
+    document.getElementById("ccencrypted").value = result
+  }
+  
+  function CDecrypt(){
+    let text = document.getElementById("ccencrypted").value
+    let key = document.getElementById("key6").value
+    let list = MatrixC()
+    let tab = new Array(list.length)
+    let ln = tab.length
+    let textArr = text.split(' ')
+    let result = ''
+    
+    for(let i = 0; i < list.length;i++){
+      let idx = list.indexOf(i+1)
+      tab[idx] = textArr[i]
+    }
+   
+   for(let j = 0;j <list.length;j++){
+      let current = list.indexOf(j+1) + 1
+      while(current > 0 ){
+        for(let i = 0; i< ln;i++){
+          result += tab[i][0] ?? ''
+          tab[i] = tab[i].slice(1)
+          current--
+          if(current <= 0){
+            break
+          }
+        }
+      }
+   }
+    document.getElementById("ccencrypt").value = result
+  }
+  
+
+  
+  
